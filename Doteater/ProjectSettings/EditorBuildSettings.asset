@@ -9,8 +9,11 @@ EditorBuildSettings:
     path: Assets/01. Scenes/scTitle.unity
     guid: 0b6ca8842c76b824b94e40dd131221ea
   - enabled: 1
-    path: Assets/01. Scenes/scGame.unity
+    path: Assets/01. Scenes/scLevel1.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/01. Scenes/scLevel2.unity
+    guid: a01a76f2461a0bb45a841a00992dc2ab
   - enabled: 1
     path: Assets/01. Scenes/scWin.unity
     guid: d20db97c95e269e4f9b992ec8df1af14

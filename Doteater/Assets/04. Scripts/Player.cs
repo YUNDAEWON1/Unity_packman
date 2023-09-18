@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -9,15 +10,35 @@ public class Player : MonoBehaviour
     public float moveSpeed=5f;
     public float rotationSpeed=360f;
 
+    private int score = 0;
+    private int Level = 1;
+    public string nextSceneName;
+
+    public Text scoreOutput;
     CharacterController charCtrl;
     Animator anim;
+    public Image stage;
+    public Image gameOver;
+    public Image gamewin;
 
-   
-    void Start()
+    void Awake()
     {
-
         charCtrl = GetComponent<CharacterController>();
         anim = GetComponentInChildren<Animator>();
+    }
+
+
+    void Start()
+    {
+        StartCoroutine("Stage");
+            
+    }
+
+    IEnumerator Stage()
+    {
+        stage.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        stage.gameObject.SetActive(false);
     }
 
    
@@ -34,7 +55,20 @@ public class Player : MonoBehaviour
         anim.SetFloat("Speed", charCtrl.velocity.magnitude);
 
         if (GameObject.FindGameObjectsWithTag("Dot").Length < 1)
-            SceneManager.LoadScene("scWin");
+        {
+            StartCoroutine("YouWin");
+            
+        }
+
+        scoreOutput.text = "SCORE : " + score;
+    }
+
+    IEnumerator YouWin()
+    {
+        gamewin.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        gamewin.gameObject.SetActive(true);
+        SceneManager.LoadScene(nextSceneName);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -43,11 +77,22 @@ public class Player : MonoBehaviour
         {
             case "Dot":
                 Destroy(other.gameObject);
+                score += 5;
                 break;
             case "Enemy":
-                SceneManager.LoadScene("scLose");
+                StartCoroutine("GameOver");
                 break;
         }
     }
+
+    IEnumerator GameOver()
+    {
+        gameOver.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        gameOver.gameObject.SetActive(false);
+        SceneManager.LoadScene("scLose");
+    }
+
+   
 
 }

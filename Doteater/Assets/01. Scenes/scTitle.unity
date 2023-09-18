@@ -381,7 +381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c1723cea4f72ab4ba3b52f8ab23922b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextSceneName: scGame
+  nextSceneName: scLevel1
   gameWin: 0
   gameLose: 0
   anim: {fileID: 755893776}
